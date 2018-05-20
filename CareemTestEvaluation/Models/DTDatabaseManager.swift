@@ -273,7 +273,7 @@ class DatabaseManager{
          let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: ENITYTSEARCH)
         do {
             let arrSearch = try DatabaseManager.sharedDatabase.managedObjectContext.fetch(fetchRequest)
-            if arrSearch.count == 10 {
+            if arrSearch.count == 11 {
                 DatabaseManager.sharedDatabase.managedObjectContext.delete(arrSearch.first as! NSManagedObject)
                 print(DatabaseManager.sharedDatabase.saveContext())
             }
