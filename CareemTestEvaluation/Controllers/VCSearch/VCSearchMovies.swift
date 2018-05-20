@@ -9,7 +9,7 @@
 import UIKit
 
 class VCSearchMovies: UIViewController {
-
+    
     let webCollector = WebserviceCollections()
     var arrMovies = [Movies]()
     var arrSuggestion = [String]()
@@ -26,6 +26,8 @@ class VCSearchMovies: UIViewController {
     @IBOutlet weak var tblSuggestion: UITableView!
     @IBOutlet weak var viewSearch: UIView!
     @IBOutlet weak var heightSuggestionView: NSLayoutConstraint!
+    
+    
     //MARK: - LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,23 +42,24 @@ class VCSearchMovies: UIViewController {
             object: nil
         )
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    //MARK: - KEYBOARD NOTIFIER
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue else {
             return
         }
         if #available(iOS 11.0, *) {
-            heightOfKeyborad = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+            heightOfKeyborad = keyboardFrame.cgRectValue.height + self.view.safeAreaInsets.bottom
         } else {
             heightOfKeyborad = keyboardFrame.cgRectValue.height
         }
     }
     
-    
+    //MARK: - SHOW ALERT WITH TITLE AND MESSAGE
     func showAlertWithTitleAndMessage( _ title : String, _ message: String){
         
         let alert = UIAlertController(title: title,  message: message, preferredStyle: .alert)
@@ -66,7 +69,8 @@ class VCSearchMovies: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    
+    //MARK: - PULL TO REFESH ACTION
+    //Reset result array and page number
     @objc func pullToRefreshAction(){
         if isConnectedToNetwork(){
             arrMovies.removeAll()
@@ -74,14 +78,15 @@ class VCSearchMovies: UIViewController {
             pageNo = 1
             searchMovies(false)
         }
-        
     }
+    
+    
     //MARK: - Search Movies
     /*Parameters
      @api_key - Static key provided to access API
      @query : Search String, cannot be blank
      @page : current Page index, page is started with 1 not 0
- */
+     */
     func searchMovies( _ isLoadMore : Bool){
         
         if isConnectedToNetwork(){
@@ -126,6 +131,11 @@ class VCSearchMovies: UIViewController {
         }
     }
     
+    //MARK: - SHOW AUTOSUGGESTION
+    /*
+     @Show Suggestion of last 10 Queries
+     @Manage Height of the Suggestion Box based on height of View and Keyboard, must not be hidden by keyboard
+     */
     func showAutoSuggest(){
         
         let arrSearch = DatabaseManager.sharedDatabase.getAllSearchResult(sbMovies.text! )
@@ -193,6 +203,7 @@ extension VCSearchMovies : UITableViewDataSource {
     }
 }
 
+//MARK: - UITABLEVIEW DELEGATE
 extension VCSearchMovies : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == tblSuggestion {
@@ -211,7 +222,7 @@ extension VCSearchMovies : UITableViewDelegate {
         if tableView == tblSuggestion ||
             arrMovies.count == 0 ||
             !isLoadMoreAvailable || isloadingData { return }
-       
+        
         let lastElement = arrMovies.count - 1
         if indexPath.row == lastElement {
             activityLoadMore.startAnimating()
