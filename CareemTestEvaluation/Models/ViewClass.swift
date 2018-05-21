@@ -11,16 +11,6 @@ import  UIKit
 /// This extesion adds some useful functions to UIView
 public extension UIView {
     
-    public func shakeView() {
-        
-        let shake: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "transform")
-        shake.values = [NSValue(caTransform3D: CATransform3DMakeTranslation(-5.0, 0.0, 0.0)), NSValue(caTransform3D: CATransform3DMakeTranslation(5.0, 0.0, 0.0))]
-        shake.autoreverses = true
-        shake.repeatCount = 2.0
-        shake.duration = 0.07
-        
-        self.layer.add(shake, forKey:"shake")
-    }
     
     public func createBordersWithColor(color: UIColor, radius: CGFloat, width: CGFloat) {
         

@@ -10,10 +10,12 @@ import Foundation
 import UIKit
 import SystemConfiguration
 
+//MARK: - API URL COMPONENTS
 let API_KEY = "2696829a81b1b5827d515ff121700838"
 let BASE_URL = "http://api.themoviedb.org/"
 let API_PATH = "3/"
 
+//MARK: - IMAGE URL COMPONENTS
 let IMAGE_BASEURL = "http://image.tmdb.org"
 let IMAGE_PATH = "/t/p/"
 
@@ -45,6 +47,7 @@ func isConnectedToNetwork() -> Bool {
     return (isReachable && !needsConnection)
 }
 
+//MARK: - CREATE RANDOM COLOR WITH ALPHA
 public func randomColorWith( _ alpha : CGFloat) -> UIColor {
     let r: UInt32 = arc4random_uniform(255)
     let g: UInt32 = arc4random_uniform(255)

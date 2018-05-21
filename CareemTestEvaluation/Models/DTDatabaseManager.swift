@@ -251,6 +251,12 @@ class DatabaseManager{
         return serachQuery
     }
     
+    //MARK: - GET ALL SEARCHS
+    /*param
+     @searchQuery : String (Value needs to be filter)
+     Output:
+     [String] : All search entries
+ */
     func getAllSearchResult( _ searchQuery : String ) -> [String] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: ENITYTSEARCH)
         if searchQuery.count != 0{
@@ -269,6 +275,8 @@ class DatabaseManager{
         }
     }
     
+    //MARK: - REGULATE ENTRIE
+    //Allow only 10 entries in DB remove the previous entry in exceed 10
     func regulateNumberOfEntries(){
          let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: ENITYTSEARCH)
         do {

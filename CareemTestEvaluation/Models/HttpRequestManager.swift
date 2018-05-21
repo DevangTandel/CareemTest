@@ -25,7 +25,6 @@ extension HttpRequestManager {
                 completion(nil, .requestFailed)
                 return
             }
-            print(response ?? "")
             if httpResponse.statusCode == 200 {
                 if let data = data {
                     do {

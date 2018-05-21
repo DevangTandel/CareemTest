@@ -98,7 +98,6 @@ extension UIImageView {
             }
             
             guard let data = data, let downloadedImage = UIImage(data: data) else {
-                print("unable to extract image")
                 return
             }
             
