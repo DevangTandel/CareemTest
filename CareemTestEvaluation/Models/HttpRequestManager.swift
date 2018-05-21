@@ -17,7 +17,12 @@ protocol HttpRequestManager {
 
 extension HttpRequestManager {
     
+    //Completion block to return result to calling function
+    //Decodable : Type alias of the model need to be parsed
+    //WebError : Possible Error that needs to be observe
     typealias JSONTaskCompletionHandler = (Decodable?, WebError?) -> Void
+    
+    //MARK: - NETWORK CALL
     func decodingTask<T: Decodable>(with request: URLRequest, decodingType: T.Type, completionHandler completion: @escaping JSONTaskCompletionHandler) -> URLSessionDataTask {
         let task = session.dataTask(with: request) { data, response, error in
             
@@ -46,6 +51,10 @@ extension HttpRequestManager {
         return task
     }
     
+    //MARK: - FETCH REQUEST
+    /*@Param
+     @request : URL for the request
+ */
     func fetch<T: Decodable>(with request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, WebError>) -> Void) {
         
         let task = decodingTask(with: request, decodingType: T.self) { (json , error) in

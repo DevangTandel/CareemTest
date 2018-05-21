@@ -17,7 +17,8 @@ enum Result<T, U> where U: Error  {
     case failure(U)
 }
 
-
+//MARK: - API ERRORS
+//Probable API error that could have encounter while fetching results
 enum WebError: Error {
     case requestFailed
     case invalidData
@@ -44,7 +45,7 @@ enum WebError: Error {
     }
 }
 
-
+//MARK: - STUCT FOR URL 
 struct WebServicePrefix {
     static func GetWSUrl(_ serviceType :WSRequestType) -> String {
         var serviceURl: String?
