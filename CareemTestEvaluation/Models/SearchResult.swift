@@ -8,6 +8,7 @@
 
 import Foundation
 
+//Search Result Object for API result
 struct SearchResult: Decodable {
     let results: [Movies]?
 }

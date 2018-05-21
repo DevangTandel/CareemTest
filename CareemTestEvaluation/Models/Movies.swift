@@ -7,6 +7,10 @@
 //
 
 import Foundation
+
+/*Object Model Of Movies Result
+ Swift 4 introduced Codable type that help us to get rid of Unneccessary tool to parse JSON object
+ */
 struct Movies : Decodable {
     let id: Int
     let vote_count: Int

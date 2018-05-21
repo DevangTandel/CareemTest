@@ -6,6 +6,10 @@
 //  Copyright © 2018 RudraApps. All rights reserved.
 //
 
+/*With following SOLID principal that state No Model should interact with Views
+ Views can be interract with viewcontrollers
+ */
+
 import UIKit
 
 class TBLCellMovies: UITableViewCell {
